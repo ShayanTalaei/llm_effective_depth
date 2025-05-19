@@ -1,0 +1,69 @@
+program: main.py
+command:
+  - ${env}
+  - python3
+  - ${program}
+  - ${args}
+method: grid
+metric:
+  name: validation/mean_accuracy
+  goal: maximize
+parameters:
+  log:
+    value: wandb
+  task:
+    value: dm_math_moeut
+  test_interval:
+    value: 2000
+  state_size:
+    value: 1024
+  transformer.n_layers:
+    value: 18
+  transformer.n_heads:
+    value: 4
+  dropout:
+    value: 0.0
+  lr:
+    value: 0.00025
+  optimizer:
+    value: adamw
+  lm.unroll:
+    value: 1024
+  batch_size:
+    value: 64
+  grad_clip:
+    value: 0.25
+  amp:
+    value: 1
+  save_interval:
+    value: 10000
+  stop_after:
+    value: 100000
+  moe.n_experts:
+    value: 387
+  moe.expert_size:
+    value: 128
+  moe.k:
+    value: 16
+  lr_sched.type:
+    value: cos
+  lr_warmup:
+    value: 4000
+  moe.att.n_experts:
+    value: 10
+  n_microbatch:
+    value: 2
+  transformer.head_projection_size:
+    value: 128
+  transformer.universal.group_size:
+    value: 2
+  wd:
+    value: 0.01
+  min_lr_multiplier:
+    value: 0.1
+  dm_math.filter:
+    value: "arithmetic_.*"
+  dm_math.loss_on_target_only:
+    values:
+      - 0
+      - 1

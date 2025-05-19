@@ -1,0 +1,45 @@
+program: main.py
+command:
+  - ${env}
+  - python3
+  - ${program}
+  - ${args}
+method: grid
+metric:
+  name: validation/mean_accuracy
+  goal: maximize
+parameters:
+  log:
+    value: wandb
+  task:
+    value: huggingface_tune_dm_math
+  test_interval:
+    value: 1000
+  lr:
+    value: 0.00002
+  optimizer:
+    value: adamw
+  batch_size:
+    value: 512
+  test_batch_size:
+    value: 128
+  lm.unroll:
+    value: 512
+  grad_clip:
+    value: 1
+  per_device_batch_size:
+    value: 32
+  save_interval:
+    value: 1000
+  stop_after:
+    value: 10000
+  lr_warmup:
+    value: 100
+  amp:
+    value: 1
+  compile:
+    value: 1
+  hf.model:
+    value: "meta-llama/Llama-3.2-3B"
+  dm_math.filter:
+    value: "arithmetic_.*"

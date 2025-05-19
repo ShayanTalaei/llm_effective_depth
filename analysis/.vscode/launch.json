@@ -1,0 +1,101 @@
+
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "name": "Debug File",
+            "justMyCode": false,
+            "program": "${file}",
+            "cwd": "${fileDirname}",
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "0"
+            },
+        },
+
+        {
+            "name": "Future effects local",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/analyze_future_effects_local.py",
+            "console": "integratedTerminal",
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "1"
+            },
+            "args": [
+              
+            ]
+        },
+
+        {
+            "name": "Future effects",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/analyze_future_effects.py",
+            "console": "integratedTerminal",
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "0"
+            },
+            "args": [
+              "llama_3.1_70b"
+            ]
+        },
+
+        {
+            "name": "Future effect per depth",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/skip_max_depth.py",
+            "console": "integratedTerminal",
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "0"
+            },
+            "args": [
+              "llama_3.1_70b", "math"
+            ]
+        },
+
+        {
+            "name": "Erasure all future",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/analyze_erasure_all_future_multipos.py",
+            "console": "integratedTerminal",
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "0"
+            },
+            "args": [
+              "llama_3.1_8b"
+            ]
+        },
+
+        {
+            "name": "Erasure effect per depth",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/erasure_max_depth_per_difficulty.py",
+            "console": "integratedTerminal",
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "0"
+            },
+            "args": [
+              "llama_3.1_70b", "mquake"
+            ]
+        },
+
+        {
+            "name": "Future local effects",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/analyze_future_local_effects.py",
+            "console": "integratedTerminal",
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "1"
+            },
+            "args": [
+              "llama_3.1_8b"
+            ]
+        },
+    ]
+}

@@ -1,0 +1,103 @@
+    {
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Qwen map layers",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "console": "integratedTerminal",
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "1"
+            },
+            "args": [
+               "-task", "map_layers", "-test_interval", "10000", "-lr", "0.00025", "-optimizer", "adamw",
+                "-lm.unroll", "512", "-batch_size", "64", "-grad_clip", "0.25", "-amp", "1",
+                "-save_interval", "1000", "-lr_warmup", "200", "-stop_after", "10000", "-lr_sched.type", "cos",
+                "-wd", "0.01", "-min_lr_multiplier", "0.1", "-compile", "0", "-name", "map_layers",
+                "-per_device_batch_size", "2", "-lmds.n_validation_token", "100000",
+                "-map_layers.src", "Qwen/Qwen2.5-1.5B", "-map_layers.tgt", "Qwen/Qwen2.5-14B",
+                "-map_layers.src_layer", "15", "-log", "tb", "-reset", "1",
+                "-map_layers.quantize", "1", "-debug_memory_iters", "0",
+                "-map_layers.diff_only", "1"
+            ]
+        },
+
+        {
+            "name": "Huggingface tune dm math",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "console": "integratedTerminal",
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "1",
+            },
+            "args": [
+                "-task", "huggingface_tune_dm_math", "-test_interval", "200", "-lr", "0.00002",
+                "-optimizer", "adamw", "-batch_size", "1", "-lm.unroll", "256", "-grad_clip", "1", "-amp", "1",
+                "-save_interval", "10000", "-n_microbatch", "1", "-stop_after", "10000",
+                "-lr_warmup", "100", "-hf.n_valid_tokens", "100000",
+                "-name", "huggingface_tune_dm_math", "-log", "tb", "-reset", "1",
+                "-amp", "1", "-compile", "0", "-optimizer", "adamw", "-hf.model", "meta-llama/Llama-3.2-1B",
+                "-dm_math.filter", "arithmetic_.*", "-hf.target_only", "1"
+            ]
+        },
+
+
+        {
+            "name": "DM math transformer",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "console": "integratedTerminal",
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "0"
+            },
+            "args": [
+                "-task", "dm_math_transformer", "-test_interval", "2000", "-state_size", "1024",
+                "-transformer.ff_multiplier", "4.014", "-transformer.n_layers", "18", "-transformer.n_heads", "16",
+                "-dropout", "0.0", "-lr", "0.00025", "-optimizer", "adamw", "-lm.unroll", "1024",
+                "-batch_size", "64", "-grad_clip", "0.25", "-amp", "1", "-save_interval", "10000",
+                "-stop_after", "100000", "-lr_sched.type", "cos", "-lr_warmup", "4000", "-wd", "0.01",
+                "-min_lr_multiplier", "0.1", "-compile", "1", "-name", "dm_math_transformer",
+                "-reset", "1", "-log", "tb", "-dm_math.filter", "arithmetic_.*",
+                "-batch_size", "2", "-dm_math.loss_on_target_only", "1"
+            ]
+        },
+
+
+        {
+            "name": "DM math MoEUT",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "console": "integratedTerminal",
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "0"
+            },
+            "args": [
+                "-task", "dm_math_moeut", "-test_interval", "2000", "-state_size", "1024",
+                "-transformer.n_layers", "18", "-transformer.n_heads", "4", "-dropout", "0.0", "-lr", "0.00025",
+                "-optimizer", "adamw", "-lm.unroll", "1024", "-batch_size", "64", "-grad_clip", "0.25",
+                "-amp", "1", "-save_interval", "10000", "-stop_after", "100000", "-moe.n_experts", "387",
+                "-moe.expert_size", "128", "-moe.k", "16", "-lr_sched.type", "cos", "-lr_warmup", "4000",
+                "-moe.att.n_experts", "10", "-n_microbatch", "2", "-transformer.head_projection_size", "128",
+                "-transformer.universal.group_size", "2", "-wd", "0.01", "-min_lr_multiplier", "0.1",
+                "-dm_math.filter", "arithmetic_.*", "-name", "dm_math_moeut_big2",
+                "-compile", "1", "-reset", "1"
+            ]
+        },
+
+
+
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "name": "Debug File",
+            "justMyCode": false,
+            "program": "${file}",
+            "cwd": "${fileDirname}"
+        }
+
+    ]
+}

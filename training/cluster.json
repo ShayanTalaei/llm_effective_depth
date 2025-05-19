@@ -1,0 +1,9 @@
+{
+    "wandb" : {
+      "project": "username/project"
+    },
+
+    "sync": {
+      "exclude": [".git*", "save", "wandb", "cache", "paper", "sweeps", "*__pycache__", "checkpoints", "jobs", "notebooks"]
+    }
+  }

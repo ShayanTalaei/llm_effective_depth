@@ -1,0 +1,86 @@
+program: main.py
+command:
+  - ${env}
+  - python3
+  - ${program}
+  - ${args}
+method: grid
+metric:
+  name: validation/mean_accuracy
+  goal: maximize
+parameters:
+  log:
+    value: wandb
+  task:
+    value: map_layers
+  test_interval:
+    value: 10000
+  lr:
+    value: 0.00025
+  optimizer:
+    value: adamw
+  lm.unroll:
+    value: 512
+  batch_size:
+    value: 64
+  grad_clip:
+    value: 0.25
+  amp:
+    value: 1
+  save_interval:
+    value: 1000
+  lr_warmup:
+    value: 200
+  stop_after:
+    value: 10000
+  lr_sched.type:
+    value: cos
+  wd:
+    value: 0.01
+  min_lr_multiplier:
+    value: 0.1
+  compile:
+    value: 0
+  name:
+    value: map_layers
+  per_device_batch_size:
+    value: 4
+  lmds.n_validation_token:
+    value: 100000
+  map_layers.src:
+    value: "Qwen/Qwen2.5-1.5B"
+  map_layers.tgt:
+    value: "Qwen/Qwen2.5-14B"
+  map_layers.quantize:
+    value: 1
+  map_layers.src_layer:
+    values:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 17
+      - 18
+      - 19
+      - 20
+      - 21
+      - 22
+      - 23
+      - 24
+      - 25
+      - 26
+      - 27
+      - 28

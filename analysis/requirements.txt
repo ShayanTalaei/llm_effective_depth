@@ -1,0 +1,9 @@
+torch
+numpy
+matplotlib
+pandas
+statsmodels
+huggingface-hub
+transformers
+datasets
+nnsight
